@@ -1,0 +1,13 @@
+title: Grapio
+tag_text: OpenFeature Provider for .NET
+description: 
+url: "https://grapio.net" # the base hostname & protocol for your site, e.g. http://example.com
+
+plugins:
+  - jekyll-seo-tag
+
+# Build settings
+markdown: kramdown
+exclude: ["README.md"]
+sass:
+  style: compressed

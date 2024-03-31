@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Grapio</title>
+  <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+  <div class="container">
+    <p><img src="assets/logo.png" alt="Logo" /></p>
+
+<p><a href="https://grapio.net">Grapio</a> is an <a href="https://openfeature.dev/">OpenFeature</a> provider for .NET that evaluates feature flags.</p>
+
+<h2 id="features">Features</h2>
+<ul>
+  <li>Feature flag evaluation</li>
+  <li>Updates to feature flags</li>
+  <li>Configurable refresh intervals for the Grapio Provider</li>
+  <li>Online and offline mode</li>
+</ul>
+
+<h2 id="architecture">Architecture</h2>
+<p>Grapio is a feature flag evaluation system that consists of three major components viz. <strong>GrapioCtl</strong>, <strong>Grapio Server</strong> and the <strong>Grapio Provider</strong>. GrapioCtl is a command-line utility that is used to set and unset feature flags. The Grapio Server serves feature flags values and stores them in a SQLite database. The Grapio Provider implements the <a href="https://openfeature.dev/specification/">OpenFeature Specification</a> and <a href="https://openfeature.dev/docs/reference/concepts/evaluation-api">Evaluation API</a>.</p>
+
+<p><img src="assets/grapio-arch-v0.1.png" alt="Architecture" /></p>
+
+<h2 id="example-configuration">Example configuration</h2>
+<p>To configure the Grapio provider, use the extension method <code class="language-plaintext highlighter-rouge">AddGrapio()</code> which will register the GrapioProvider service and its configuration GrapioConfiguration as singletons. <code class="language-plaintext highlighter-rouge">AddGrapio()</code> will validate the configuration and throw a ValidationException if it fails.</p>
+
+<p>Below is an example configuration of the Grapio Provider:</p>
+
+<div class="language-csharp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">host</span><span class="p">.</span><span class="n">Services</span><span class="p">.</span><span class="nf">AddGrapio</span><span class="p">(</span><span class="n">config</span> <span class="p">=&gt;</span>
+<span class="p">{</span>
+    <span class="n">config</span><span class="p">.</span><span class="n">Offline</span> <span class="p">=</span> <span class="k">true</span><span class="p">;</span>
+    <span class="n">config</span><span class="p">.</span><span class="n">RefreshInterval</span> <span class="p">=</span> <span class="m">300</span><span class="p">;</span>
+    <span class="n">config</span><span class="p">.</span><span class="n">Requester</span> <span class="p">=</span> <span class="s">"GrapioProvider"</span><span class="p">;</span>
+    <span class="n">config</span><span class="p">.</span><span class="n">ServerUri</span> <span class="p">=</span> <span class="k">new</span> <span class="nf">Uri</span><span class="p">(</span><span class="s">"http://localhost:3278"</span><span class="p">);</span>    
+    <span class="n">config</span><span class="p">.</span><span class="n">ConnectionString</span> <span class="p">=</span> <span class="s">"Data Source=grapio.db;"</span><span class="p">;</span>
+<span class="p">});</span>
+</code></pre></div></div>
+
+  </div>
+  <footer id="footer">
+    <center>
+    <small>
+        Copyright &copy; SS du Plooy <time datetime="2024-03-31T18:48:10+02:00">2024</time>. All rights reserved.
+    </small>
+    </center>
+</footer>
+
+</body>
+</html>
